@@ -1,0 +1,1391 @@
+[
+    {
+        "id": "0781518840749ce3",
+        "type": "tab",
+        "label": "Flujo final",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "79216bd62b7806dd",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "SetPoint",
+        "name": "SetPoint",
+        "x": 620,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "b04157c225be781f",
+        "type": "inject",
+        "z": "0781518840749ce3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "5.5",
+        "payloadType": "num",
+        "x": 550,
+        "y": 900,
+        "wires": [
+            [
+                "6183e867b2b62743"
+            ]
+        ]
+    },
+    {
+        "id": "6183e867b2b62743",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "Prueba",
+        "name": "Prueba",
+        "x": 740,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "accd4db158649034",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "Stop",
+        "name": "Stop",
+        "x": 730,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "6c960b72c92eeea8",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "Velocidad",
+        "diff": true,
+        "name": "VELOCIDAD",
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "b51f3730ce1b24f4"
+            ]
+        ]
+    },
+    {
+        "id": "4d8e9d35f513014b",
+        "type": "telegram receiver",
+        "z": "0781518840749ce3",
+        "name": "Anthony_Industri40",
+        "bot": "7d3a9047733f3b1d",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 110,
+        "y": 1080,
+        "wires": [
+            [
+                "34b2050495770b1c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7be92d1de79f60b3",
+        "type": "telegram command",
+        "z": "0781518840749ce3",
+        "name": "Produccion",
+        "command": "/Producción",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "7d3a9047733f3b1d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 80,
+        "y": 1400,
+        "wires": [
+            [
+                "83ef3049d8331dc5",
+                "b55fbf216c70aff9",
+                "91cca1686f9b8f4a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "83ef3049d8331dc5",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 1",
+        "func": "// Verificar si msg.payload.content existe\nif (msg.payload && msg.payload.content !== undefined && msg.payload.content !== null) {\n    // Convertir el contenido a número y asignarlo a msg.payload\n    msg.payload = parseFloat(msg.payload.content.trim());\n    \n    // Verificar si la conversión a número fue exitosa\n    if (isNaN(msg.payload)) {\n        msg.payload = \"Contenido no es un número válido\";  // En caso de que no sea un número válido\n    }\n} else {\n    // Si msg.payload.content no está definido, asignar un valor por defecto o manejar el error\n    msg.payload = \"Contenido no disponible\";\n}\n\n// Devolver el mensaje con msg.payload\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1400,
+        "wires": [
+            [
+                "79216bd62b7806dd"
+            ]
+        ]
+    },
+    {
+        "id": "3910d06420d483b8",
+        "type": "telegram sender",
+        "z": "0781518840749ce3",
+        "name": "Enviar_Respuesta",
+        "bot": "7d3a9047733f3b1d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a310f3abdc8f75f6",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 2",
+        "func": "// Verificar que msg.payload.content existe\nif (msg.payload && msg.payload.content !== undefined && msg.payload.content !== null) {\n    // Convertir el contenido a número\n    let cantidad = parseFloat(msg.payload.content.trim());\n\n    // Verificar si la conversión fue exitosa\n    if (isNaN(cantidad)) {\n        msg.payload = {\n            \"chatId\": msg.payload.chatId,\n            \"type\": msg.payload.type,\n            \"content\": \"Error: El contenido no es un número válido.\"\n        };\n    } else {\n        // Crear el mensaje de salida\n        msg.payload = {\n            \"chatId\": msg.payload.chatId,  // Mantener el chatId original\n            \"type\": msg.payload.type,      // Mantener el tipo de mensaje original (e.g., 'message')\n            \"content\": `Se empezarán a producir ${cantidad} unidades.`  // Construir el mensaje\n        };\n    }\n} else {\n    // Si no existe msg.payload.content, enviar un mensaje de error\n    msg.payload = {\n        \"chatId\": msg.payload.chatId,\n        \"type\": msg.payload.type,\n        \"content\": \"Error: No se proporcionó el contenido.\"\n    };\n}\n\n// Devolver el mensaje con el formato correcto\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1440,
+        "wires": [
+            [
+                "3910d06420d483b8"
+            ]
+        ]
+    },
+    {
+        "id": "b55fbf216c70aff9",
+        "type": "delay",
+        "z": "0781518840749ce3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 1440,
+        "wires": [
+            [
+                "a310f3abdc8f75f6"
+            ]
+        ]
+    },
+    {
+        "id": "b7a78d9b732585ab",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "Emergency",
+        "name": "Emergency",
+        "x": 750,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "34b2050495770b1c",
+        "type": "switch",
+        "z": "0781518840749ce3",
+        "name": "Parada",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Stop",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Emergencia",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 320,
+        "y": 1060,
+        "wires": [
+            [
+                "511dcb75b14aa5f0",
+                "6da953ef2a1c9a2e"
+            ],
+            [
+                "fe9a2760539ae836",
+                "19791fae74027ad1"
+            ]
+        ]
+    },
+    {
+        "id": "511dcb75b14aa5f0",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 3",
+        "func": "msg.payload=true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 980,
+        "wires": [
+            [
+                "accd4db158649034"
+            ]
+        ]
+    },
+    {
+        "id": "534f0b46e8b9d52a",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 4",
+        "func": "// Verificar que msg.payload.content existe y es \"Stop\"\nif (msg.payload && msg.payload.content !== undefined && msg.payload.content === \"Stop\") {\n    // Crear el mensaje de salida cuando content es \"Stop\"\n    msg.payload = {\n        \"chatId\": msg.payload.chatId,  // Mantener el chatId original\n        \"type\": msg.payload.type,      // Mantener el tipo de mensaje original (e.g., 'message')\n        \"content\": \"Se detendrá la producción. Se esperará a que la última unidad haya sido procesada.\"\n    };\n} else {\n    // Si content no es \"Stop\" o no está presente, asignar un mensaje de error o un mensaje de advertencia\n    msg.payload = {\n        \"chatId\": msg.payload.chatId,\n        \"type\": msg.payload.type,\n        \"content\": \"Error: Se esperaba el comando 'Stop' para detener la producción.\"\n    };\n}\n\n// Devolver el mensaje con el formato correcto\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 1040,
+        "wires": [
+            [
+                "7dab57e81d057145"
+            ]
+        ]
+    },
+    {
+        "id": "6da953ef2a1c9a2e",
+        "type": "delay",
+        "z": "0781518840749ce3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1040,
+        "wires": [
+            [
+                "534f0b46e8b9d52a"
+            ]
+        ]
+    },
+    {
+        "id": "7dab57e81d057145",
+        "type": "telegram sender",
+        "z": "0781518840749ce3",
+        "name": "Enviar_Respuesta",
+        "bot": "7d3a9047733f3b1d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "91cca1686f9b8f4a",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 5",
+        "func": "msg.payload=false;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1360,
+        "wires": [
+            [
+                "0a70f995a9e0cfe1",
+                "fbdf7c69d289c39a"
+            ]
+        ]
+    },
+    {
+        "id": "0a70f995a9e0cfe1",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "Stop",
+        "name": "Stop",
+        "x": 590,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "fe9a2760539ae836",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 6",
+        "func": "msg.payload=true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1140,
+        "wires": [
+            [
+                "b7a78d9b732585ab"
+            ]
+        ]
+    },
+    {
+        "id": "01636ae3b6323696",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 7",
+        "func": "// Verificar que msg.payload.content existe y es \"Stop\"\nif (msg.payload && msg.payload.content !== undefined && msg.payload.content === \"Emergencia\") {\n    // Crear el mensaje de salida cuando content es \"Stop\"\n    msg.payload = {\n        \"chatId\": msg.payload.chatId,  // Mantener el chatId original\n        \"type\": msg.payload.type,      // Mantener el tipo de mensaje original (e.g., 'message')\n        \"content\": \"Se ha detenido la producción completamente.\"\n    };\n} else {\n    // Si content no es \"Stop\" o no está presente, asignar un mensaje de error o un mensaje de advertencia\n    msg.payload = {\n        \"chatId\": msg.payload.chatId,\n        \"type\": msg.payload.type,\n        \"content\": \"Error: Se esperaba el comando 'Emergencia' para detener la producción.\"\n    };\n}\n\n// Devolver el mensaje con el formato correcto\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 1200,
+        "wires": [
+            [
+                "89d05e184da8e3eb"
+            ]
+        ]
+    },
+    {
+        "id": "19791fae74027ad1",
+        "type": "delay",
+        "z": "0781518840749ce3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1200,
+        "wires": [
+            [
+                "01636ae3b6323696"
+            ]
+        ]
+    },
+    {
+        "id": "89d05e184da8e3eb",
+        "type": "telegram sender",
+        "z": "0781518840749ce3",
+        "name": "Enviar_Respuesta",
+        "bot": "7d3a9047733f3b1d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fbdf7c69d289c39a",
+        "type": "s7 out",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "variable": "Emergency",
+        "name": "Emergency",
+        "x": 610,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "b51f3730ce1b24f4",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "VELOCIDAD",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 790,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c5f6233bc1a54d10",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "Disponibilidad",
+        "diff": true,
+        "name": "DISPONIBILIDAD",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "4dce7e374bd57221"
+            ]
+        ]
+    },
+    {
+        "id": "5ea4c8ffb9b3be26",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "DISPONIBILIDAD",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 810,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ad5b1ca8d0e4d0a0",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "Performance",
+        "diff": true,
+        "name": "PERFORMANCE",
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "3223f3cdc0d2d9ef"
+            ]
+        ]
+    },
+    {
+        "id": "e836052b54f0f971",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "PERFORMANCE",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 810,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7761c16834d3d6fd",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "OEE",
+        "diff": true,
+        "name": "OEE",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "6679a4cd61f06a93"
+            ]
+        ]
+    },
+    {
+        "id": "7c5ea9452121a0cc",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "OEE_R",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "fd3662b1b8017d3f",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "TiempoFuncionamiento",
+        "diff": true,
+        "name": "TIEMPO FUNCIONAMIENTO",
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "6ee032e556bfda5b"
+            ]
+        ]
+    },
+    {
+        "id": "6ee032e556bfda5b",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "TIEMPO FUNCIONAMIENTO",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 850,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7d346880d40fd0f6",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "UnidadesReales",
+        "diff": true,
+        "name": "UNIDADES REALES",
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "42e4e20f5d87939e"
+            ]
+        ]
+    },
+    {
+        "id": "42e4e20f5d87939e",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "UNIDADES REALES",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 820,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "af55e822fc438ebb",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "UnidadesEsperadas",
+        "diff": true,
+        "name": "UNIDADES ESPERADAS",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "a1f7dedf891f978e"
+            ]
+        ]
+    },
+    {
+        "id": "a1f7dedf891f978e",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "UNIDADES ESPERADAS",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 830,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c1c090d37277fa8e",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "Funcionando",
+        "diff": true,
+        "name": "FUNCIONANDO",
+        "x": 200,
+        "y": 620,
+        "wires": [
+            [
+                "03f23e3fb2ab39a3"
+            ]
+        ]
+    },
+    {
+        "id": "3e55226f99e2fb2d",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "single",
+        "variable": "Parado",
+        "diff": true,
+        "name": "PARADO",
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "a6474583192145ca"
+            ]
+        ]
+    },
+    {
+        "id": "03f23e3fb2ab39a3",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 11",
+        "func": "msg.topic = \"FUNCIONANDO\";\nmsg.payload = msg.payload === true ? 1 : 0;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "15ba1c36b653a75b"
+            ]
+        ]
+    },
+    {
+        "id": "a6474583192145ca",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 10",
+        "func": "msg.topic = \"PARADO\";\nmsg.payload = msg.payload === true ? 1 : 0;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 680,
+        "wires": [
+            [
+                "15ba1c36b653a75b"
+            ]
+        ]
+    },
+    {
+        "id": "15ba1c36b653a75b",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 12",
+        "func": "if (msg.topic === \"FUNCIONANDO\") {\n    context.set(\"f\", msg.payload ? 1 : 0);\n}\n\nif (msg.topic === \"PARADO\") {\n    context.set(\"p\", msg.payload ? 1 : 0);\n}\n\nlet f = context.get(\"f\");\nlet p = context.get(\"p\");\n\nif (f === undefined || p === undefined) {\n    return null;\n}\n\nlet estado = null;\n\nif (f === 1 && p === 0) {\n    estado = 1;   // funcionando\n}\n\nelse if (f === 0 && p === 1) {\n    estado = 0;   // parado\n}\n\n\nmsg.payload = estado;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 640,
+        "wires": [
+            [
+                "e5ec43eb9adae54c"
+            ]
+        ]
+    },
+    {
+        "id": "e5ec43eb9adae54c",
+        "type": "influxdb out",
+        "z": "0781518840749ce3",
+        "influxdb": "a803632e58059ee2",
+        "name": "",
+        "measurement": "ESTADO",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "PROYECTO",
+        "x": 1000,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "4dce7e374bd57221",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 13",
+        "func": "\nmsg.payload = msg.payload * 100;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "5ea4c8ffb9b3be26"
+            ]
+        ]
+    },
+    {
+        "id": "3223f3cdc0d2d9ef",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 14",
+        "func": "msg.payload = msg.payload * 100;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "e836052b54f0f971"
+            ]
+        ]
+    },
+    {
+        "id": "6679a4cd61f06a93",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "function 15",
+        "func": "msg.payload = msg.payload*1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "7c5ea9452121a0cc"
+            ]
+        ]
+    },
+    {
+        "id": "240df9dc6ae38fcd",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "Guardar mensaje",
+        "func": "flow.set(\"mensaje\",msg);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1980,
+        "wires": [
+            [
+                "57222d386cd8ae12"
+            ]
+        ]
+    },
+    {
+        "id": "57222d386cd8ae12",
+        "type": "switch",
+        "z": "0781518840749ce3",
+        "name": "Evaluar comando",
+        "property": "$uppercase(msg.payload.content)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "/HELP",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "/DATOS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "/LOG_ON",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "/LOG_OFF",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 430,
+        "y": 2080,
+        "wires": [
+            [
+                "f2f85c4eac1985b8"
+            ],
+            [
+                "b694d56b58a73bc6"
+            ],
+            [
+                "a831ec4bf3188641"
+            ],
+            [
+                "6e5391f88380a019"
+            ]
+        ]
+    },
+    {
+        "id": "f2f85c4eac1985b8",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "HELP",
+        "func": "mensaje = \"Hola \" + msg.originalMessage.chat.first_name + \"\\n\";\nmensaje = mensaje + \"Las acciones que puedes realizar son :\\n\";\nmensaje = mensaje + \"/datos: Envio de variables \\n\";\nmensaje = mensaje + \"/log_on: Activar el logger \\n\";\nmensaje = mensaje + \"/log_Off: Desactivar el logger \\n\";\nmsg.payload.content = mensaje;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 10,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 2020,
+        "wires": [
+            [
+                "42d627413402b009",
+                "c5417d3e58f2a13f"
+            ]
+        ]
+    },
+    {
+        "id": "b694d56b58a73bc6",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "Disparador",
+        "func": "flow.set(\"disparador\", true);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 2060,
+        "wires": [
+            [
+                "31a572609c56d09d"
+            ]
+        ]
+    },
+    {
+        "id": "a831ec4bf3188641",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "LOG ON",
+        "func": "flow.set(\"logger\", true);\nmsg.payload.content = \"Logger activado\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2100,
+        "wires": [
+            [
+                "c5417d3e58f2a13f",
+                "dd4d86c99249825e"
+            ]
+        ]
+    },
+    {
+        "id": "6e5391f88380a019",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "LOG OFF",
+        "func": "flow.set(\"logger\", false);\nmsg.payload.content = \"Logger desactivado\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2140,
+        "wires": [
+            [
+                "dd4d86c99249825e",
+                "c5417d3e58f2a13f"
+            ]
+        ]
+    },
+    {
+        "id": "42d627413402b009",
+        "type": "debug",
+        "z": "0781518840749ce3",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "664576593cbbd80f",
+        "type": "inject",
+        "z": "0781518840749ce3",
+        "name": "",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 860,
+        "y": 2000,
+        "wires": [
+            [
+                "31a572609c56d09d"
+            ]
+        ]
+    },
+    {
+        "id": "31a572609c56d09d",
+        "type": "s7 control",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "function": "trigger",
+        "name": "Disparar lectura",
+        "x": 1000,
+        "y": 2060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5417d3e58f2a13f",
+        "type": "telegram sender",
+        "z": "0781518840749ce3",
+        "name": "",
+        "bot": "7d3a9047733f3b1d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 2120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd4d86c99249825e",
+        "type": "debug",
+        "z": "0781518840749ce3",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "cc273ead705dfeed",
+        "type": "telegram receiver",
+        "z": "0781518840749ce3",
+        "name": "",
+        "bot": "7d3a9047733f3b1d",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 170,
+        "y": 1980,
+        "wires": [
+            [
+                "240df9dc6ae38fcd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b4d742a936609e5a",
+        "type": "s7 in",
+        "z": "0781518840749ce3",
+        "endpoint": "d5ea73750b3e9426",
+        "mode": "all",
+        "variable": "",
+        "diff": true,
+        "name": "Leer Datos",
+        "x": 180,
+        "y": 2240,
+        "wires": [
+            [
+                "4f58edf40952c704",
+                "e8b7e155af458d2b"
+            ]
+        ]
+    },
+    {
+        "id": "4f58edf40952c704",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "Ajustar 3 decimales",
+        "func": "// Asignación de las variables reales con var\nvar SetPoint = msg.payload.SetPoint;\nvar Stop = msg.payload.Stop;\n\n// Redondeo y ajuste para las variables solicitadas\nvar Velocidad = Math.round(msg.payload.Velocidad * 100) / 100;\nvar Disponibilidad = Math.round(msg.payload.Disponibilidad * 100) / 100 * 100;  // Multiplicado por 100\nvar Performance = Math.round(msg.payload.Performance * 100) / 100 * 100;  // Multiplicado por 100\nvar OEE = Math.round(msg.payload.OEE * 100) / 100;\nvar Emergency = msg.payload.Emergency;\nvar Funcionando = msg.payload.Funcionando;\nvar TiempoFuncionamiento = Math.round(msg.payload.TiempoFuncionamiento * 100) / 100;\nvar UnidadesReales = Math.round(msg.payload.UnidadesReales * 100) / 100;\nvar UnidadesEsperadas = Math.round(msg.payload.UnidadesEsperadas * 100) / 100;\nvar Parado = msg.payload.Parado;\n\n// Asignación de las variables a msg\nmsg.SetPoint = SetPoint;\nmsg.Stop = Stop;\nmsg.Velocidad = Velocidad;\nmsg.Disponibilidad = Disponibilidad;\nmsg.Performance = Performance;\nmsg.OEE = OEE;\nmsg.Emergency = Emergency;\nmsg.Funcionando = Funcionando;\nmsg.TiempoFuncionamiento = TiempoFuncionamiento;\nmsg.UnidadesReales = UnidadesReales;\nmsg.UnidadesEsperadas = UnidadesEsperadas;\nmsg.Parado = Parado;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 2240,
+        "wires": [
+            [
+                "54c1b02fbfc64477"
+            ]
+        ]
+    },
+    {
+        "id": "54c1b02fbfc64477",
+        "type": "switch",
+        "z": "0781518840749ce3",
+        "name": "Disparador es True?",
+        "property": "disparador",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 420,
+        "y": 2320,
+        "wires": [
+            [
+                "aa3e0a97550f3d6b"
+            ],
+            [
+                "69a9ec316b3c13b5"
+            ]
+        ]
+    },
+    {
+        "id": "69a9ec316b3c13b5",
+        "type": "switch",
+        "z": "0781518840749ce3",
+        "name": "Logger es true?",
+        "property": "logger",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 2400,
+        "wires": [
+            [
+                "63a37c79a738eda9"
+            ]
+        ]
+    },
+    {
+        "id": "aa3e0a97550f3d6b",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "Enviar datos",
+        "func": "flow.set(\"disparador\", false);\n\nvar date = new Date();\n\n// Construcción del contenido con tus variables reales\nvar contenido = \"La fecha y hora actual es: \" + date.toLocaleDateString() + \"\\n\";\ncontenido += \"SetPoint: \" + msg.SetPoint + \"\\n\";\ncontenido += \"Stop: \" + msg.Stop + \"\\n\";\ncontenido += \"Velocidad: \" + msg.Velocidad + \"\\n\";\ncontenido += \"Disponibilidad: \" + msg.Disponibilidad + \"\\n\";\ncontenido += \"Performance: \" + msg.Performance + \"\\n\";\ncontenido += \"OEE: \" + msg.OEE + \"\\n\";\ncontenido += \"Emergency: \" + msg.Emergency + \"\\n\";\ncontenido += \"Funcionando: \" + msg.Funcionando + \"\\n\";\ncontenido += \"TiempoFuncionamiento: \" + msg.TiempoFuncionamiento + \"\\n\";\ncontenido += \"UnidadesReales: \" + msg.UnidadesReales + \"\\n\";\ncontenido += \"UnidadesEsperadas: \" + msg.UnidadesEsperadas + \"\\n\";\ncontenido += \"Parado: \" + msg.Parado + \"\\n\";\n\n// Recuperar mensaje almacenado en flow\nvar mensaje = flow.get(\"mensaje\");\nmensaje.payload.content = contenido;\n\nreturn mensaje;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 2320,
+        "wires": [
+            [
+                "bc1cb32285e81d19",
+                "c5417d3e58f2a13f"
+            ]
+        ]
+    },
+    {
+        "id": "bc1cb32285e81d19",
+        "type": "debug",
+        "z": "0781518840749ce3",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "e8b7e155af458d2b",
+        "type": "debug",
+        "z": "0781518840749ce3",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "63a37c79a738eda9",
+        "type": "function",
+        "z": "0781518840749ce3",
+        "name": "Enviar datos logger",
+        "func": "flow.set(\"disparador\", false);\n\nvar date = new Date();\n\n// Construcción del contenido con tus variables reales\nvar contenido = \"La fecha y hora actual es: \" + date.toLocaleDateString() + \"\\n\";\ncontenido += \"SetPoint: \" + msg.SetPoint + \"\\n\";\ncontenido += \"Stop: \" + msg.Stop + \"\\n\";\ncontenido += \"Velocidad: \" + msg.Velocidad + \"\\n\";\ncontenido += \"Disponibilidad: \" + msg.Disponibilidad + \"\\n\";\ncontenido += \"Performance: \" + msg.Performance + \"\\n\";\ncontenido += \"OEE: \" + msg.OEE + \"\\n\";\ncontenido += \"Emergency: \" + msg.Emergency + \"\\n\";\ncontenido += \"Funcionando: \" + msg.Funcionando + \"\\n\";\ncontenido += \"TiempoFuncionamiento: \" + msg.TiempoFuncionamiento + \"\\n\";\ncontenido += \"UnidadesReales: \" + msg.UnidadesReales + \"\\n\";\ncontenido += \"UnidadesEsperadas: \" + msg.UnidadesEsperadas + \"\\n\";\ncontenido += \"Parado: \" + msg.Parado + \"\\n\";\n\n// Recuperar mensaje almacenado en flow\nvar mensaje = flow.get(\"mensaje\");\nmensaje.payload.content = contenido;\n\nreturn mensaje;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 2400,
+        "wires": [
+            [
+                "c5417d3e58f2a13f",
+                "bc1cb32285e81d19"
+            ]
+        ]
+    },
+    {
+        "id": "d5ea73750b3e9426",
+        "type": "s7 endpoint",
+        "transport": "iso-on-tcp",
+        "address": "192.168.0.21",
+        "port": "102",
+        "rack": "0",
+        "slot": "1",
+        "localtsaphi": "01",
+        "localtsaplo": "00",
+        "remotetsaphi": "01",
+        "remotetsaplo": "00",
+        "connmode": "rack-slot",
+        "adapter": "",
+        "busaddr": 2,
+        "cycletime": "1000",
+        "timeout": 2000,
+        "name": "PLC_Control",
+        "vartable": [
+            {
+                "addr": "DB1,R0",
+                "name": "Prueba"
+            },
+            {
+                "addr": "DB1,INT4",
+                "name": "SetPoint"
+            },
+            {
+                "addr": "DB5,X0.0",
+                "name": "Stop"
+            },
+            {
+                "addr": "DB4,R0",
+                "name": "Velocidad"
+            },
+            {
+                "addr": "DB4,R4",
+                "name": "Disponibilidad"
+            },
+            {
+                "addr": "DB4,R8",
+                "name": "Performance"
+            },
+            {
+                "addr": "DB4,R12",
+                "name": "OEE"
+            },
+            {
+                "addr": "DB5,X0.1",
+                "name": "Emergency"
+            },
+            {
+                "addr": "DB4,X28.0",
+                "name": "Funcionando"
+            },
+            {
+                "addr": "DB4,R16",
+                "name": "TiempoFuncionamiento"
+            },
+            {
+                "addr": "DB4,R20",
+                "name": "UnidadesReales"
+            },
+            {
+                "addr": "DB4,R24",
+                "name": "UnidadesEsperadas"
+            },
+            {
+                "addr": "DB4,X28.1",
+                "name": "Parado"
+            }
+        ]
+    },
+    {
+        "id": "7d3a9047733f3b1d",
+        "type": "telegram bot",
+        "botname": "Anthony_industria40_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "a803632e58059ee2",
+        "type": "influxdb",
+        "hostname": "192.168.0.41",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "PROYECTO",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://us-east-1-1.aws.cloud2.influxdata.com/",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "42dc6102714e1280",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-s7": "3.1.1",
+            "node-red-contrib-telegrambot": "16.4.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
