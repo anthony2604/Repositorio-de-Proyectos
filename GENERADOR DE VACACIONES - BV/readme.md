@@ -8,7 +8,7 @@
 
 This tool was designed to **automate the generation of legal HR documents** (Vacation Certificates) for large workforces. It replaces a tedious manual workflow (Excel copy-paste → Word → PDF) with a streamlined automated process, reducing processing time by **95%** and eliminating human error.
 
-> **⚠️ Disclaimer:** This repository contains a **generalized ("sanitized") version** of a tool originally developed for a corporate environment. All sensitive data, logos, and company-specific logic have been replaced with generic placeholders (`DIV_A`, `DIV_B`, `logo_empresa.png`) for portfolio demonstration purposes.
+> **⚠️ Disclaimer:** This repository contains a **generalized ("sanitized") version** of a tool originally developed for a corporate environment. All sensitive data, logos, and company-specific logic have been replaced with generic placeholders (`DIV_A`, `DIV_B`, `logo.jpg`) for portfolio demonstration purposes.
 
 ### 🚀 Key Features
 
@@ -41,3 +41,4 @@ This tool was designed to **automate the generation of legal HR documents** (Vac
 ├── logo_empresa.png     # Placeholder image for the header
 ├── requirements.txt     # Python dependencies
 └── README.md            # Documentation
+
