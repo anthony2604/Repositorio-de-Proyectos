@@ -20,7 +20,7 @@ Este repositorio contiene una selección de proyectos que demuestran mi capacida
 | Proyecto | Tecnologías | Descripción Corta |
 | :--- | :--- | :--- |
 | **[Industria 4.0 Smart Assembly System](./Industria40_Smart_Assembly_System)** | 🔌 PLC S7-1500, Node-RED, Telegram, InfluxDB | Sistema de ensamblaje inteligente que integra control industrial con monitoreo en la nube y gestión remota vía Telegram. |
-| **[Modernización de Instrumentación Industrial](./Proyecto%20Instrumentacion%20Industrial%20-%20UTEC)** | 🎛️ SCADA, PROFINET, HART, Safety Systems | Automatización de un módulo de pruebas hidráulicas con control PID avanzado, interlocks de seguridad y supervisión SCADA. |
+| **[Modernización de Instrumentación Industrial](./Proyecto%20Instrumentación%20Industrial%20-%20UTEC)** | 🎛️ SCADA, PROFINET, HART, Safety Systems | Automatización de un módulo de pruebas hidráulicas con control PID avanzado, interlocks de seguridad y supervisión SCADA. |
 
 ### 💻 Desarrollo de Software & Automatización de Procesos (RPA)
 
