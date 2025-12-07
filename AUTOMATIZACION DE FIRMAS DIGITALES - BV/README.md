@@ -22,7 +22,7 @@ Nació como una iniciativa proactiva para solucionar un cuello de botella críti
 
 | Panel de Login | Carga Masiva |
 |:---:|:---:|
-| ![Login Screen](assets/login_screen.png) | ![Dashboard Carga](assets/dashboard.png) |
+| ![Login Screen](assets/main.png) | ![Dashboard Carga](assets/carga.png) |
 
 ---
 
@@ -92,5 +92,6 @@ IOFE-Mass-Manager/
 │
 ├── requirements.txt        # Dependencias del proyecto
 └── README.md               # Este archivo
+
 
 
