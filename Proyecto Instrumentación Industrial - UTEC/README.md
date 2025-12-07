@@ -34,13 +34,13 @@ El objetivo principal fue diseñar un sistema capaz de controlar el llenado de t
 
 El sistema se basa en una arquitectura centralizada donde el PLC S7-1500 gestiona todos los lazos de control y se comunica con un sistema SCADA vía PROFINET.
 
-`![Arquitectura de Control](assets/arquitectura_control.png)`
+![Arquitectura de Control](assets/arquitectura_control.png)
 
 ### Diagrama de Tuberías e Instrumentación (P&ID)
 Se diseñó el P&ID completo bajo norma ISA, definiendo 7 lazos de control principales.
 
 
-`![P&ID](assets/pid_diagram.png)`
+![P&ID](assets/pid_diagram.png)
 
 ## 🎛️ Estrategia de Control
 
@@ -67,7 +67,7 @@ Una parte crítica del proyecto fue el cálculo de ingeniería para la selecció
 * Estimación de carga del PLC (Power Budget y Memory Card).
 
 
-`![Dimensionamiento de válvula de control](assets/valvula.png)`
+![Dimensionamiento de válvula de control](assets/valvula.png)
 
 
 ## 📂 Estructura del Repositorio
@@ -79,4 +79,5 @@ Una parte crítica del proyecto fue el cálculo de ingeniería para la selecció
 
 ---
 **Autor:** Anthony Valle Quinde - Estudiante de Ingeniería Mecatrónica @ UTEC
+
 **Curso:** Instrumentación Industrial
