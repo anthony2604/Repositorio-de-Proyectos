@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Vacaciones</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+        .container {
+            width: 210mm;
+            height: 297mm; /* Altura A4 */
+            margin: 0 auto;
+            border: 0px solid #000; /* Borde removido para limpieza visual */
+            box-sizing: border-box;
+            padding: 20mm 25mm; /* Márgenes estándar */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            margin-bottom: 10mm;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5mm;
+        }
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .header-col {
+            vertical-align: middle;
+        }
+        .logo-col {
+            width: 25%;
+            text-align: left;
+        }
+        .title-col {
+            width: 50%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14pt;
+            text-transform: uppercase;
+        }
+        .info-col {
+            width: 25%;
+            text-align: right;
+            font-size: 8pt;
+            line-height: 1.4;
+            color: #555;
+        }
+        
+        /* --- CUERPO --- */
+        .content-body {
+            flex-grow: 1;
+        }
+        .section-title {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 5mm;
+            margin-top: 5mm;
+            text-decoration: underline;
+            color: #000;
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 4mm; /* Espaciado entre líneas */
+            align-items: baseline;
+            border-bottom: 1px dotted #ccc; /* Línea guía visual */
+            padding-bottom: 1mm;
+        }
+        .form-label {
+            width: 35%;
+            font-weight: bold;
+            color: #444;
+        }
+        .form-value {
+            width: 65%;
+            font-weight: normal;
+            padding-left: 5px;
+            color: #000;
+        }
+
+        /* --- FECHA Y FIRMAS --- */
+        .date-line {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15mm;
+            margin-bottom: 25mm;
+            font-size: 10pt;
+        }
+        .date-line span {
+            margin: 0 3px;
+        }
+        .dynamic-date {
+            font-weight: bold;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10mm;
+            text-align: center;
+        }
+        .signature-box {
+            width: 40%;
+            border-top: 1px solid #000;
+            padding-top: 3mm;
+            font-size: 9pt;
+        }
+        
+        /* --- FOOTER / CHECKBOXES --- */
+        .footer-section {
+            margin-top: auto;
+            border-top: 2px solid #333;
+            padding-top: 5mm;
+            font-size: 8pt;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .company-check-table {
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        .company-check-table td {
+            border: 1px solid #999;
+            padding: 3px 8px;
+        }
+        .check-box {
+            text-align: center;
+            font-weight: bold;
+            width: 20px;
+        }
+        .doc-code {
+            text-align: right;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <table class="header-table">
+                <tr>
+                    <td class="header-col logo-col">
+                        <img src="logo.jpg" alt="LOGO" style="max-height: 15mm; width: auto;">
+                    </td>
+                    <td class="header-col title-col">
+                        Boleta de Vacaciones
+                    </td>
+                    <td class="header-col info-col">
+                        <strong>Código:</strong> RH-VAC-01<br>
+                        <strong>Versión:</strong> 1.0<br>
+                        <strong>Dpto:</strong> Recursos Humanos
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="content-body">
+            <div class="section-title">Datos del Colaborador</div>
+            
+            <div class="form-row">
+                <span class="form-label">Apellidos y Nombres:</span>
+                <span class="form-value">{{ APELLIDOS_NOMBRES }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">Cargo:</span>
+                <span class="form-value">{{ CARGO }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">División / Área:</span>
+                <span class="form-value">{{ AREA_DIVISION }}</span>
+            </div>
+
+            <div class="section-title">Detalle de la Solicitud</div>
+
+            <div class="form-row">
+                <span class="form-label">Periodo Correspondiente:</span>
+                <span class="form-value">{{ PERIODO_VACACIONAL }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">Fecha de Inicio:</span>
+                <span class="form-value">{{ INICIO_PERIODO_VACACIONAL }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">Fecha de Término:</span>
+                <span class="form-value">{{ TERMINO_PERIODO_VACACIONAL }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">Reincorporación:</span>
+                <span class="form-value">{{ DIA_RETORNO_EMPRESA }}</span>
+            </div>
+            <div class="form-row">
+                <span class="form-label">Total Días Efectivos:</span>
+                <span class="form-value">{{ DIAS_EFECTIVOS_GOCE }}</span>
+            </div>
+
+            <div class="date-line">
+                <span>Ciudad de Origen, </span>
+                <span class="dynamic-date">{{ DIA_FIRMA }}</span>
+                <span>de</span>
+                <span class="dynamic-date">{{ MES_FIRMA }}</span>
+                <span>del</span>
+                <span class="dynamic-date">{{ ANIO_FIRMA }}</span>
+            </div>
+
+            <div class="signature-section">
+                <div class="signature-box">
+                    <strong>Jefatura Inmediata</strong><br>
+                    (Firma y Sello)
+                </div>
+                <div class="signature-box">
+                    <strong>Colaborador(a)</strong><br>
+                    (Firma)
+                </div>
+                <div class="signature-box">
+                    <strong>V°B° Recursos Humanos</strong><br>
+                    (Conformidad)
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <strong>Razón Social Empleadora:</strong>
+                    <br><br>
+                    <table class="company-check-table">
+                        <tr>
+                            <td>Empresa / División "A"</td>
+                            <td class="check-box">{{ MARCA_A }}</td>
+                        </tr>
+                        <tr>
+                            <td>Empresa / División "B"</td>
+                            <td class="check-box">{{ MARCA_B }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="doc-code">
+                    Documento generado automáticamente.<br>
+                    Sistema de Gestión Documental Interno.<br>
+                    Ref: AUT-DOC-PY
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
