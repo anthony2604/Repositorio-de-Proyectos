@@ -37,8 +37,9 @@ This tool was designed to **automate the generation of legal HR documents** (Vac
 .
 ├── main.py              # Main application script (GUI + Logic)
 ├── template.html        # HTML Template for the document (Jinja2)
-├── data_dummy.xlsx      # Sample dataset for testing
-├── logo_empresa.png     # Placeholder image for the header
+├── DatosEjemplo.xlsx      # Sample dataset for testing
+├── logo.jpg     # Placeholder image for the header
 ├── requirements.txt     # Python dependencies
 └── README.md            # Documentation
+
 
