@@ -55,5 +55,5 @@ Debido a acuerdos de confidencialidad (**NDA**), los reportes de inversión, an�
 
 ### 📫 Contacto
 ¿Interesado en optimizar procesos o discutir sobre tecnología?
-* **LinkedIn:** [Tu URL de LinkedIn aquí]
+* **LinkedIn:** [https://www.linkedin.com/in/anthony-valle-utec/]
 * **Email:** anthonyvallequinde@gmail.com
