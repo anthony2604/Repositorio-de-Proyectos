@@ -32,7 +32,7 @@ Este repositorio contiene una selección de proyectos que demuestran mi capacida
 ---
 
 ## 🔒 Nota sobre Experiencia en Estrategia de Inversión (NDA)
-Adicional a los proyectos técnicos listados arriba, cuento con experiencia como **Analista de Investigación Estratégica de Mercado (HCIG)**.
+Adicional a los proyectos técnicos listados arriba, cuento con experiencia como **Asistente de Investigación Estratégica de Mercado (HCIG)**.
 Debido a acuerdos de confidencialidad (**NDA**), los reportes de inversión, análisis de *near-shoring* y dashboards financieros desarrollados durante este periodo no están públicos en este repositorio. Sin embargo, esta experiencia reforzó mis habilidades en:
 * **Business Intelligence:** Power BI & Excel Avanzado.
 * **Análisis de Mercado:** Estudios de viabilidad para manufactura en LATAM.
