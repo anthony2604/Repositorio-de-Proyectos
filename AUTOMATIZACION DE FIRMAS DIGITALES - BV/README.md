@@ -91,7 +91,9 @@ IOFE-Mass-Manager/
 │   └── google_credentials_dummy.json
 │
 ├── requirements.txt        # Dependencias del proyecto
+├── flocharts/
 └── README.md               # Este archivo
+
 
 
 
