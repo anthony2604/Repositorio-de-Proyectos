@@ -77,21 +77,22 @@ Uso de `pandas` y `openpyxl` para transformar reportes administrativos en Excel 
 IOFE-Mass-Manager/
 │
 ├── assets/                 # Capturas de pantalla y diagramas
-│   ├── login_screen.png
-│   └── dashboard.png
+│   ├── main.png
+│   └── carga.png
 │
 ├── docs/                   # Documentación técnica adicional
-│   └── IOFE_Technical_Report.pdf
+│   └── Reporte Tecnico.pdf
 │
 ├── src/                    # Código fuente
 │   └── main.py             # Script principal (Sanitizado)
 │
 ├── samples/                # Archivos de ejemplo para pruebas
-│   ├── input_anulacion_ejemplo.xlsx
+│   ├── documentos_a_cancelar.xlsx
 │   └── google_credentials_dummy.json
 │
 ├── requirements.txt        # Dependencias del proyecto
 └── README.md               # Este archivo
+
 
 
 
