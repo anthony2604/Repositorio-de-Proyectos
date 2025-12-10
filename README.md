@@ -4,7 +4,7 @@
 ![Focus](https://img.shields.io/badge/Focus-Automation_%26_Data-blue)
 ![Python](https://img.shields.io/badge/Python-Advanced-yellow)
 ![PLC](https://img.shields.io/badge/PLC-Siemens_S7--1500-green)
-![Status](https://img.shields.io/badge/Open_to_Work-Remote_%7C_Hybrid-orange)
+
 
 ## 👨‍💻 Sobre Mí
 Soy un **Ingeniero Mecatrónico** enfocado en la **Eficiencia Operativa** y la **Transformación Digital**. Mi especialidad es identificar procesos manuales o ineficientes y construir soluciones tecnológicas escalables, combinando la **Automatización Industrial (OT)**, el **Desarrollo de Software (IT)** y el **Diseño de Hardware**.
