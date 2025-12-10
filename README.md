@@ -34,7 +34,7 @@ Este repositorio contiene una selección de proyectos que demuestran mi capacida
 | :--- | :--- | :--- |
 | **[Automatización de Firmas Digitales (BV)](./AUTOMATIZACION%20DE%20FIRMAS%20DIGITALES%20-%20BV)** | 🐍 Python, APIs REST, Google Sheets | Sistema de gestión integral para la carga, seguimiento y anulación masiva de documentos de firma digital. Redujo la carga operativa manual en un 98%. |
 | **[Generador de Certificados RRHH (BV)](./GENERADOR%20DE%20VACACIONES%20-%20BV)** | 📄 Python (Exe), Pandas, PDF Automation | Aplicación de escritorio (.exe) diseñada para usuarios no técnicos. Genera automáticamente cientos de certificados de vacaciones firmados desde un Excel en minutos. |
-| **[Sistema de Alertas de Contratos](./Sistema_Alertas_Contratos_PowerAutomate)** | ⚡ Power Automate, Microsoft Excel | Robot auditor virtual 24/7. Monitorea bases de datos de contratos y notifica proactivamente vencimientos para evitar riesgos legales/operativos. |
+| **[Sistema de Alertas de Contratos](./Sistema_Alertas_Contratos_PowerAutomate)** | ⚡ Power Automate, Microsoft Excel | Auditor virtual 24/7. Monitorea bases de datos de contratos y notifica proactivamente vencimientos para evitar riesgos legales/operativos. |
 
 ---
 
