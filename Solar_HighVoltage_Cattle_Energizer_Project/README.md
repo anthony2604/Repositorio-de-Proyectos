@@ -18,7 +18,7 @@ The system generates controlled 12kV pulses to maintain perimeter security for c
 
 | Enclosure Design (Fusion 360) | PCB 3D View (KiCad) | Field Operation |
 | :---: | :---: | :---: |
-| ![Enclosure](./01_Product_Showcase/enclosure_render_fusion360.png) | ![PCB](./01_Product_Showcase/pcb_3d_view.png) | ![Photo](./01_Product_Showcase/final_product_photo.jpg) |
+| ![Enclosure](./01_Product_Showcase/enclosure_render_fusion360.png) | ![PCB](./01_Product_Showcase/pcb_3d_view.png) | ![Photo](./01_Product_Showcase/final_product_photo.jpeg) |
 
 ---
 
@@ -82,3 +82,4 @@ The core of the system is a custom-designed PCB engineered for high reliability 
 **Author:** Anthony Valle Quinde
 
 *Mechatronics Engineering | UTEC*
+
