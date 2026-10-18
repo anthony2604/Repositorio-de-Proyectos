@@ -1,67 +1,110 @@
-# 🚀 Portafolio de Ingeniería Mecatrónica & Transformación Digital
-### Anthony Valle Quinde | UTEC - Décimo Superior
+# Anthony Valle Quinde
+### Mecatrónica · Robótica · Datos y automatización de operaciones
 
-![Focus](https://img.shields.io/badge/Focus-Automation_%26_Data-blue)
-![Python](https://img.shields.io/badge/Python-Advanced-yellow)
-![PLC](https://img.shields.io/badge/PLC-Siemens_S7--1500-green)
+**Bachiller en Ingeniería Mecatrónica por UTEC | Lima, Perú**
 
+Desarrollo soluciones que conectan equipos, software y datos para reducir trabajo manual y mejorar la visibilidad de las operaciones. Mi experiencia combina automatización industrial, sistemas embebidos y desarrollo de aplicaciones; actualmente mi enfoque está en datos operativos y herramientas de gestión para minería.
 
-## 👨‍💻 Sobre Mí
-Soy un **Ingeniero Mecatrónico** enfocado en la **Eficiencia Operativa** y la **Transformación Digital**. Mi especialidad es identificar procesos manuales o ineficientes y construir soluciones tecnológicas escalables, combinando la **Automatización Industrial (OT)**, el **Desarrollo de Software (IT)** y el **Diseño de Hardware**.
+Este portafolio reúne proyectos académicos, herramientas de automatización y resúmenes de experiencia profesional. Cada caso distingue su alcance y la evidencia disponible.
 
-Este repositorio contiene una selección de proyectos que demuestran mi capacidad para integrar hardware, software y lógica de negocio en soluciones reales.
+[LinkedIn](https://www.linkedin.com/in/anthony-valle-utec/) · [Correo](mailto:anthonyvallequinde@gmail.com)
 
 ---
 
-## 📂 Proyectos Destacados
+## Proyectos destacados
 
-### 🔌 Diseño de Producto & Ingeniería de Hardware (NUEVO)
+Ordenados por su relación con integración de sistemas, información operativa y automatización.
 
-| Proyecto | Tecnologías | Descripción Corta |
+### 1. Datos y software para operaciones mineras
+**Experiencia profesional · Desarrollo en curso · Resumen público**
+
+**Problema:** procesos manuales y registros dispersos dificultan consolidar información para el seguimiento operativo y las decisiones de gestión.
+
+**Contribución:** desarrollo frontend y backend, y trabajo con **SQL Server**, en un ERP orientado a operaciones mineras. El trabajo se enfoca en centralizar registros y automatizar flujos; las comparativas automáticas y el seguimiento cercano al tiempo real son objetivos de evolución del sistema.
+
+**Valor:** conectar la captura de información operativa con las necesidades de supervisión y negocio.
+
+**Alcance público:** descripción funcional de mi participación. No se publican código del empleador, nombres de clientes, datos operativos, esquemas de bases de datos, credenciales ni detalles de infraestructura. No se atribuyen ahorros, disponibilidad o mejoras de productividad sin medición.
+
+### 2. Brazo robótico con control distribuido por CAN y visión
+**Tesis de Mecatrónica · Proyecto académico · Resumen técnico público**
+
+**Problema:** integrar percepción visual, control de articulaciones y accionamiento en un manipulador con electrónica distribuida.
+
+**Desarrollo:**
+
+- Arquitectura con **cuatro nodos ESP32/ESP32-C3**, comunicados por **CAN** mediante transceptores SN65HVD230.
+- Accionamiento de motores paso a paso con **DM556 y TMC2209**, realimentación angular mediante encoders y control de una pinza.
+- Identificación de planta y trabajo con controladores **PID y LQI** en **MATLAB/Simulink**.
+- Trabajo de visión con **RT-DETR y SAM 2**, orientado a detección, segmentación y selección de agarre.
+
+**Valor técnico:** integración de comunicación, control, electrónica y percepción en un mismo proyecto. La arquitectura CAN se adoptó ante problemas de comunicación con sensores I²C sobre cableado largo y ruido eléctrico.
+
+**Evidencia disponible:** este resumen describe el proyecto; el código, la memoria y los ensayos de la tesis no están incorporados a este repositorio. No se presentan objetivos de frecuencia de control, precisión o latencia como resultados medidos.
+
+### 3. Ensamblaje inteligente e integración OT/IT
+**Proyecto académico · Documentación pública**
+
+**[Ver proyecto](./Industria40_Smart_Assembly_System/README.md)**
+
+Integración de **Siemens S7-1500, Factory I/O, Node-RED, InfluxDB y Grafana** para control secuencial, almacenamiento de datos y visualización de indicadores de producción. Incluye interacción mediante Telegram.
+
+**Valor:** demostrar el recorrido desde señales y estados de una planta simulada hasta históricos e indicadores para supervisión. El alcance corresponde a un entorno académico con simulación en Factory I/O.
+
+### 4. Automatización documental y de procesos
+**Herramientas de software · Código o documentación según el caso**
+
+| Proyecto | Contribución y utilidad | Tecnologías |
 | :--- | :--- | :--- |
-| **[Energizador Solar de Alta Tensión (12kV)](./Solar_HighVoltage_Cattle_Energizer_Project)** | ⚡ KiCad, Fusion 360, Power Electronics, JLCPCB | Desarrollo integral de producto: Energizador autónomo híbrido. Diseño de PCB para HV, electrónica de potencia y carcasa IP65 para manufactura. |
+| **[Gestión masiva de firmas digitales](./AUTOMATIZACION%20DE%20FIRMAS%20DIGITALES%20-%20BV/README.md)** | Carga, anulación y descarga por lotes mediante API, con registro de metadatos para seguimiento. | Python, API REST, Tkinter, Pandas, Google Sheets |
+| **[Generador de documentos de vacaciones](./GENERADOR%20DE%20VACACIONES%20-%20BV/readme.md)** | Conversión de registros Excel en documentos PDF con plantillas e interfaz de escritorio. | Python, Pandas, Jinja2, WeasyPrint, Tkinter |
+| **[Alertas de vencimiento de contratos](./Sistema_Alertas_Contratos_PowerAutomate/README.MD)** | Revisión programada cada tres días y alertas para contratos vigentes con siete días o menos hasta su vencimiento. | Power Automate, Excel Online |
 
-### 🏭 Automatización Industrial & Industria 4.0
+**Impacto que puede describirse:** procesamiento por lotes, reutilización de plantillas y revisiones programadas sustituyen tareas repetitivas. No se publican porcentajes de ahorro ni garantías de eliminación de errores sin una comparación reproducible.
 
-| Proyecto | Tecnologías | Descripción Corta |
-| :--- | :--- | :--- |
-| **[Industria 4.0 Smart Assembly System](./Industria40_Smart_Assembly_System)** | 🔌 PLC S7-1500, Node-RED, Telegram, InfluxDB | Sistema de ensamblaje inteligente que integra control industrial con monitoreo en la nube, KPIs en tiempo real y gestión remota vía Telegram. |
-| **[Modernización de Instrumentación Industrial](./Proyecto%20Instrumentación%20Industrial%20-%20UTEC)** | 🎛️ SCADA, PROFINET, HART, Safety Systems | Automatización de un módulo de pruebas hidráulicas con control PID avanzado, interlocks de seguridad y supervisión SCADA. |
+### 5. Instrumentación industrial e ingeniería de hardware
+**Proyectos con documentación pública**
 
-### 💻 Desarrollo de Software & Automatización de Procesos (RPA)
+| Proyecto | Alcance |
+| :--- | :--- |
+| **[Automatización del módulo de bombeo HM-362](./Proyecto%20Instrumentaci%C3%B3n%20Industrial%20-%20UTEC/README.md)** | Ingeniería de detalle académica: selección de instrumentación, P&ID, dimensionamiento de válvulas, estrategia de control e interlocks con arquitectura Siemens S7-1500, PROFINET y HART. |
+| **[Energizador solar para cercos ganaderos](./Solar_HighVoltage_Cattle_Energizer_Project/README.md)** | Electrónica de potencia, diseño de PCB y carcasa con KiCad y Fusion 360. Documentación de producto; archivos de diseño restringidos por propiedad intelectual. |
 
-| Proyecto | Tecnologías | Descripción Corta |
-| :--- | :--- | :--- |
-| **[Automatización de Firmas Digitales (BV)](./AUTOMATIZACION%20DE%20FIRMAS%20DIGITALES%20-%20BV)** | 🐍 Python, APIs REST, Google Sheets | Sistema de gestión integral para la carga, seguimiento y anulación masiva de documentos de firma digital. Redujo la carga operativa manual en un 98%. |
-| **[Generador de Certificados RRHH (BV)](./GENERADOR%20DE%20VACACIONES%20-%20BV)** | 📄 Python (Exe), Pandas, PDF Automation | Aplicación de escritorio (.exe) diseñada para usuarios no técnicos. Genera automáticamente cientos de certificados de vacaciones firmados desde un Excel en minutos. |
-| **[Sistema de Alertas de Contratos](./Sistema_Alertas_Contratos_PowerAutomate)** | ⚡ Power Automate, Microsoft Excel | Auditor virtual 24/7. Monitorea bases de datos de contratos y notifica proactivamente vencimientos para evitar riesgos legales/operativos. |
-
----
-
-## 🔒 Nota sobre Experiencia en Estrategia de Inversión (NDA)
-Adicional a los proyectos técnicos listados arriba, cuento con experiencia como **Analista de Investigación Estratégica de Mercado (HCIG)**.
-Debido a acuerdos de confidencialidad (**NDA**), los reportes de inversión, análisis de *near-shoring* y dashboards financieros desarrollados durante este periodo no son públicos. Sin embargo, esta experiencia reforzó mis habilidades en:
-* **Business Intelligence:** Power BI & Excel Avanzado.
-* **Análisis de Mercado:** Estudios de viabilidad técnica y económica para manufactura en LATAM.
+Las especificaciones de tensión, autonomía, protección IP y conformidad normativa requieren condiciones de ensayo y evidencia específica; este portafolio no las presenta como prestaciones certificadas.
 
 ---
 
-## 🛠️ Tech Stack & Herramientas
+## Evidencia y métricas
 
-### ⚙️ Ingeniería, Hardware & Control
-* **PLCs:** Siemens S7-1200/1500 (TIA Portal), Allen Bradley.
-* **Diseño Electrónico (ECAD):** KiCad (PCB Design), Proteus (Simulación).
-* **Diseño Mecánico (CAD):** Autodesk Fusion 360, AutoCAD, SolidWorks.
-* **Protocolos:** PROFINET, Modbus TCP/RTU, HART.
+- **Robótica:** cuatro nodos en la arquitectura descrita; sin cifras públicas de precisión, latencia o tasa de éxito.
+- **Automatización documental:** alcance funcional documentado; sin benchmark reproducible que sustente porcentajes de reducción de tiempo.
+- **Alertas de contratos:** ejecución periódica cada tres días; sin afirmar vigilancia continua ni detección garantizada.
+- **Operaciones mineras:** contribución y objetivos descritos de forma general; resultados empresariales y activos internos reservados.
 
-### 🖥️ Software & Data
-* **Lenguajes:** Python (Pandas, NumPy, Requests, Tkinter/Flet).
-* **Low-Code / RPA:** Power Automate, Node-RED.
-* **Data Visualization:** Power BI, Grafana, Excel (VBA/Macros).
+Las métricas de rendimiento deben indicar línea base, muestra, condiciones y método de medición. Las descripciones anteriores delimitan las afirmaciones de este README; la documentación histórica de cada proyecto puede contener estimaciones que requieren validación.
 
 ---
 
-### 📫 Contacto
-¿Interesado en optimizar procesos o discutir sobre tecnología?
-* **LinkedIn:** [https://www.linkedin.com/in/anthony-valle-utec/](https://www.linkedin.com/in/anthony-valle-utec/)
-* **Email:** anthonyvallequinde@gmail.com
+## Stack técnico
+
+| Área | Herramientas y tecnologías utilizadas |
+| :--- | :--- |
+| **Datos y software** | Python, SQL Server, Pandas, NumPy, API REST, aplicaciones frontend/backend |
+| **Automatización de procesos** | Power Automate, Node-RED, Excel, Jinja2, WeasyPrint, Tkinter |
+| **Control e industria** | MATLAB/Simulink, PID, LQI, Siemens S7-1200/1500, TIA Portal, Factory I/O |
+| **Robótica y embebidos** | ESP32, ESP32-C3, CAN, SN65HVD230, I²C, encoders, motores paso a paso |
+| **Visión e indicadores** | RT-DETR, SAM 2, TensorRT, Grafana, InfluxDB |
+| **Diseño y prototipado** | KiCad, Fusion 360, impresión 3D |
+
+## Formación y orientación profesional
+
+Bachiller en Ingeniería Mecatrónica por **UTEC**. Experiencia de investigación en **University of Alberta** mediante el programa **ELAP**, trabajando con seguimiento de movimiento mediante IMUs y entornos de realidad virtual.
+
+Me interesa desarrollar sistemas que conecten automatización de campo, datos confiables y decisiones de negocio, especialmente en operaciones industriales y mineras.
+
+## Contacto
+
+- **LinkedIn:** [Anthony Valle Quinde](https://www.linkedin.com/in/anthony-valle-utec/)
+- **Correo:** [anthonyvallequinde@gmail.com](mailto:anthonyvallequinde@gmail.com)
+
+*Actualizado: octubre de 2026.*
